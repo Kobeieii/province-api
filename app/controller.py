@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 import models
 import schemas
 from exceptions import InvalidId
+from typing import List
 
 def get_provinces(db: Session):
     return db.query(models.Province).all()
@@ -18,7 +19,7 @@ def get_subdistricts(district_id:int, db: Session):
         raise InvalidId
     return district.subdistrict
 
-def format_district_n_subdistrict(districts: list[models.District]):
+def format_district_n_subdistrict(districts: List[models.District]):
     data = []
     for district in districts:
         data.append(

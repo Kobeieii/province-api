@@ -14,6 +14,6 @@ echo "build the docker image"
 docker build -t $NAME .
 
 echo "Deploying the updated container"
-docker run -d -p 80:80 --name $NAME --restart always $NAME
+docker run -p 80:80 --name $NAME --restart always $NAME
 
 echo "Deploying the container"

@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List
 
 class Province(BaseModel):
     id: int
@@ -27,7 +28,7 @@ class Subdistrict(BaseModel):
 
 class ResponseDistNSubDist(BaseModel):
     district: District
-    subdistrict: list[Subdistrict]
+    subdistrict: List[Subdistrict]
 
     class Config:
         orm_mode = True
