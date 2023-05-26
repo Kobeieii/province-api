@@ -17,3 +17,14 @@ def get_subdistricts(district_id:int, db: Session):
     if not district:
         raise InvalidId
     return district.subdistrict
+
+def format_district_n_subdistrict(districts: list[models.District]):
+    data = []
+    for district in districts:
+        data.append(
+            {
+                'district': district,
+                'subdistrict': district.subdistrict
+            }
+        )
+    return data

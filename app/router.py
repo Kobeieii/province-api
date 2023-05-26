@@ -5,7 +5,8 @@ import schemas
 from controller import (
     get_provinces,
     get_districts,
-    get_subdistricts
+    get_subdistricts,
+    format_district_n_subdistrict
 )
 from exceptions import InvalidId
 import json
@@ -29,6 +30,15 @@ def provinces(db: Session = Depends(get_db)):
 def district_of_province(province_id:int, db: Session = Depends(get_db)):
     try:
         return get_districts(province_id, db)
+    except InvalidId:
+        raise HTTPException(status_code=404, detail="Invalid province id")
+
+@router.get('/provinces/{province_id}/districts/subdistricts', response_model=list[schemas.ResponseDistNSubDist], status_code=200)
+def subdistrict_and_district_of_province(province_id:int, db: Session = Depends(get_db)):
+    try:
+        districts = get_districts(province_id, db)
+        res = format_district_n_subdistrict(districts)
+        return res
     except InvalidId:
         raise HTTPException(status_code=404, detail="Invalid province id")
     

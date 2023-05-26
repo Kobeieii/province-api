@@ -24,3 +24,10 @@ class Subdistrict(BaseModel):
 
     class Config:
         orm_mode = True
+
+class ResponseDistNSubDist(BaseModel):
+    district: District
+    subdistrict: list[Subdistrict]
+
+    class Config:
+        orm_mode = True
